@@ -1,0 +1,36 @@
+[PrimaryGenerator]
+PythonGenerator = 'generator.spray'
+PythonGeneratorArgs = []
+NumEvents = 100
+
+[Geometry.World]
+Type = 'G4Box'
+pX = 750e-6
+pY = 750e-6
+pZ = 750e-6
+Material = 'G4_Galactic'
+Visible = false
+
+[Geometry.World.Dump]
+Type = 'G4Box'
+pX = 250e-6
+pY = 250e-6
+pZ = 250e-6
+Material = 'G4_Fe'
+Transformation = [['TranslateZ'], [0.0]]
+Color = [1.0, 1.0, 1.0, 1.0]
+
+[Detectors.Dump]
+Type = 'BinnedDepositionSD'
+Volumes = ['World.Dump']
+#Transformation = []
+BinEdges = [
+  '1e-6*mm*array([-250.0, 250.0])',
+  '1e-6*mm*array([-250.0, 250.0])',
+  '1e-6*mm*array([-250.0, 250.0])']
+#  '1e-6*mm*arange(-500.0, 500.1, 1.0)']
+File = 'edep.h5'
+
+[EventActions.Status]
+Type = 'Status'
+UpdatePeriod = 1.0
